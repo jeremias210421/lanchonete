@@ -9,13 +9,12 @@
 <body class="bg-gray-100">
     <header class="bg-yellow-500 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Lanchonete Delivery</h1>
+            <h1 class="text-2xl font-bold">Carrinho de Compras</h1>
             <nav>
                 <ul class="flex space-x-4">
                     <li><a href="index.html" class="hover:underline">Início</a></li>
                     <li><a href="menu.html" class="hover:underline">Menu</a></li>
                     <li><a href="login.html" class="hover:underline">Login/Cadastro</a></li>
-                    <li><a href="carrinho.html" class="hover:underline">Carrinho</a></li>
                 </ul>
             </nav>
         </div>
@@ -28,12 +27,9 @@
             <!-- Itens do carrinho serão exibidos aqui -->
         </div>
 
-        <div class="text-right mb-8">
-            <h3 class="text-2xl font-bold">Total: R$ <span id="totalPrice">0,00</span></h3>
-        </div>
-
         <div class="text-right">
-            <button onclick="checkout()" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition duration-300">Finalizar Compra</button>
+            <p id="totalPrice" class="text-xl font-bold mb-4">Total: R$ 0,00</p>
+            <button onclick="finalizeOrder()" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Finalizar Pedido</button>
         </div>
     </main>
 
@@ -48,49 +44,31 @@
     <script>
         function loadCart() {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let cartItems = document.getElementById('cartItems');
-            let totalPrice = 0;
+            let cartItemsContainer = document.getElementById('cartItems');
+            let total = 0;
 
             if (cart.length === 0) {
-                cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
-            } else {
-                cartItems.innerHTML = '';
-                cart.forEach((item, index) => {
-                    totalPrice += item.price;
-                    cartItems.innerHTML += `
-                        <div class="bg-white p-4 rounded-lg shadow-md mb-4 flex justify-between items-center">
-                            <span>${item.item}</span>
-                            <span>R$ ${item.price.toFixed(2)}</span>
-                            <button onclick="removeFromCart(${index})" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition duration-300">Remover</button>
-                        </div>
-                    `;
-                });
-            }
-
-            document.getElementById('totalPrice').innerText = totalPrice.toFixed(2);
-        }
-
-        function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            loadCart();
-        }
-
-        function checkout() {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.length === 0) {
-                alert('Seu carrinho está vazio.');
+                cartItemsContainer.innerHTML = '<p class="text-xl">Seu carrinho está vazio.</p>';
                 return;
             }
 
-            // Aqui, você pode redirecionar para uma página de checkout real ou processar o pedido
-            alert('Compra finalizada! Total: R$ ' + document.getElementById('totalPrice').innerText);
-            localStorage.removeItem('cart');
-            loadCart();
+            cart.forEach(item => {
+                let itemElement = document.createElement('div');
+                itemElement.classList.add('flex', 'justify-between', 'items-center', 'border-b', 'py-4');
+                itemElement.innerHTML = `<span>${item.item}</span><span>R$ ${item.price.toFixed(2)}</span>`;
+                cartItemsContainer.appendChild(itemElement);
+                total += item.price;
+            });
+
+            document.getElementById('totalPrice').innerText = `Total: R$ ${total.toFixed(2)}`;
         }
 
-        // Carrega o carrinho ao carregar a página
+        function finalizeOrder() {
+            alert('Pedido finalizado com sucesso! Em breve você receberá a confirmação por e-mail.');
+            localStorage.removeItem('cart');
+            window.location.href = 'index.html';
+        }
+
         window.onload = loadCart;
     </script>
 </body>
