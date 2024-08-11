@@ -3,29 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Lanchonete Delivery - Menu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 </head>
 <body class="bg-gray-100">
     <header class="bg-yellow-500 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Menu de Produtos</h1>
+            <h1 class="text-2xl font-bold">Lanchonete Delivery</h1>
             <nav>
                 <ul class="flex space-x-4">
                     <li><a href="index.html" class="hover:underline">Início</a></li>
-                    <li><a href="carrinho.html" class="hover:underline">Carrinho</a></li>
+                    <li><a href="menu.html" class="hover:underline">Menu</a></li>
                     <li><a href="login.html" class="hover:underline">Login/Cadastro</a></li>
+                    <li><a href="carrinho.html" class="hover:underline">Carrinho</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main class="container mx-auto mt-8 p-4">
-        <h2 class="text-3xl font-bold mb-8">Selecione os Produtos</h2>
+        <h2 class="text-3xl font-bold mb-8">Nosso Menu</h2>
 
-        <div id="menuItems">
-            <!-- Itens do menu serão exibidos aqui -->
-        </div>
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold mb-4">Hambúrgueres</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="/api/placeholder/300/200" alt="X-Burger" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h4 class="text-xl font-bold mb-2">X-Burger</h4>
+                    <p class="mb-4">Hambúrguer, queijo, alface, tomate e maionese.</p>
+                    <p class="font-bold mb-4">R$ 15,00</p>
+                    <input type="number" id="qtyXBurger" class="w-full p-2 border rounded mb-4" placeholder="Quantidade" min="1">
+                    <button onclick="addToCart('X-Burger', 15.00, 'qtyXBurger')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
+                    <p id="msgXBurger" class="text-red-500 mt-2"></p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="/api/placeholder/300/200" alt="X-Salada" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h4 class="text-xl font-bold mb-2">X-Salada</h4>
+                    <p class="mb-4">Hambúrguer, queijo, alface, tomate, cebola e maionese.</p>
+                    <p class="font-bold mb-4">R$ 16,00</p>
+                    <input type="number" id="qtyXSalada" class="w-full p-2 border rounded mb-4" placeholder="Quantidade" min="1">
+                    <button onclick="addToCart('X-Salada', 16.00, 'qtyXSalada')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
+                    <p id="msgXSalada" class="text-red-500 mt-2"></p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <img src="/api/placeholder/300/200" alt="X-Bacon" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h4 class="text-xl font-bold mb-2">X-Bacon</h4>
+                    <p class="mb-4">Hambúrguer, queijo, bacon, alface, tomate e maionese.</p>
+                    <p class="font-bold mb-4">R$ 18,00</p>
+                    <input type="number" id="qtyXBacon" class="w-full p-2 border rounded mb-4" placeholder="Quantidade" min="1">
+                    <button onclick="addToCart('X-Bacon', 18.00, 'qtyXBacon')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
+                    <p id="msgXBacon" class="text-red-500 mt-2"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Adicione as seções de acompanhamentos e bebidas conforme necessário, com a mesma lógica -->
     </main>
 
     <footer class="bg-gray-800 text-white mt-16 py-8">
@@ -37,51 +69,25 @@
     </footer>
 
     <script>
-        const menuItems = [
-            { item: 'Hambúrguer', price: 15.00 },
-            { item: 'Pizza', price: 25.00 },
-            { item: 'Refrigerante', price: 5.00 },
-            { item: 'Batata Frita', price: 10.00 }
-        ];
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
 
-        function loadMenu() {
-            const menuContainer = document.getElementById('menuItems');
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            menuItems.forEach(product => {
-                let productInCart = cart.find(item => item.item === product.item);
-                let productElement = document.createElement('div');
-                productElement.classList.add('border-b', 'py-4', 'flex', 'justify-between', 'items-center');
-                productElement.innerHTML = `
-                    <span>${product.item} - R$ ${product.price.toFixed(2)}</span>
-                    ${
-                        productInCart 
-                        ? `<span class="text-red-500">Já solicitado</span>` 
-                        : `<input type="number" min="1" value="1" class="quantity w-16 p-2 border rounded" data-item="${product.item}" data-price="${product.price}">
-                        <button class="bg-yellow-500 text-white px-4 py-2 rounded ml-4 hover:bg-yellow-600 transition duration-300" onclick="addToCart('${product.item}', ${product.price})">Adicionar</button>`
-                    }
-                `;
-                menuContainer.appendChild(productElement);
-            });
-        }
-
-        function addToCart(item, price) {
-            let quantity = document.querySelector(`input[data-item="${item}"]`).value;
-            quantity = parseInt(quantity) || 1;
-
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.find(cartItem => cartItem.item === item)) {
-                alert('Este produto já foi solicitado!');
+        function addToCart(item, price, qtyId) {
+            let qty = document.getElementById(qtyId).value;
+            if (!qty || qty <= 0) {
+                alert('Por favor, informe uma quantidade válida.');
                 return;
             }
 
-            cart.push({ item, price, quantity });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert('Produto adicionado ao carrinho!');
-            window.location.reload();
-        }
+            if (cart[item]) {
+                document.getElementById(`msg${item.replace(/\s+/g, '')}`).innerText = 'Este produto já foi solicitado.';
+                return;
+            }
 
-        window.onload = loadMenu;
+            cart[item] = { price, qty: parseInt(qty) };
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById(`msg${item.replace(/\s+/g, '')}`).innerText = '';
+            alert(`${item} adicionado ao carrinho!`);
+        }
     </script>
 </body>
 </html>
