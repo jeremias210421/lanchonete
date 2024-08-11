@@ -28,6 +28,14 @@
                 <label for="password" class="block text-lg font-bold">Senha:</label>
                 <input type="password" id="password" class="w-full p-2 border border-gray-300 rounded" required>
             </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-lg font-bold">Telefone:</label>
+                <input type="tel" id="phone" class="w-full p-2 border border-gray-300 rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="address" class="block text-lg font-bold">Endereço Completo:</label>
+                <textarea id="address" class="w-full p-2 border border-gray-300 rounded" rows="3" required></textarea>
+            </div>
             <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Cadastrar</button>
         </form>
         <p class="mt-4">Já tem uma conta? <a href="login.html" class="text-blue-500">Faça login aqui.</a></p>
@@ -39,9 +47,11 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
 
             const users = JSON.parse(localStorage.getItem('users')) || [];
-            users.push({ name, email, password });
+            users.push({ name, email, password, phone, address });
             localStorage.setItem('users', JSON.stringify(users));
 
             alert('Cadastro realizado com sucesso!');
