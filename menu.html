@@ -27,37 +27,41 @@
         <section class="mb-12">
             <h3 class="text-2xl font-bold mb-4">Hambúrgueres</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- X-Burger -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <img src="/api/placeholder/300/200" alt="X-Burger" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h4 class="text-xl font-bold mb-2">X-Burger</h4>
                     <p class="mb-4">Hambúrguer, queijo, alface, tomate e maionese.</p>
                     <p class="font-bold mb-4">R$ 15,00</p>
-                    <input type="number" id="qtyXBurger" class="w-full p-2 border rounded mb-4" placeholder="Quantidade" min="1">
-                    <button onclick="addToCart('X-Burger', 15.00, 'qtyXBurger')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                    <p id="msgXBurger" class="text-red-500 mt-2"></p>
+                    <input type="number" id="quantity-x-burger" min="1" value="1" class="w-full p-2 border rounded mb-4">
+                    <button onclick="addToCart('X-Burger', 15.00, document.getElementById('quantity-x-burger').value)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
+                    <p id="status-x-burger" class="text-green-500 mt-2"></p>
                 </div>
+                <!-- X-Salada -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <img src="/api/placeholder/300/200" alt="X-Salada" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h4 class="text-xl font-bold mb-2">X-Salada</h4>
                     <p class="mb-4">Hambúrguer, queijo, alface, tomate, cebola e maionese.</p>
                     <p class="font-bold mb-4">R$ 16,00</p>
-                    <input type="number" id="qtyXSalada" class="w-full p-2 border rounded mb-4" placeholder="Quantidade" min="1">
-                    <button onclick="addToCart('X-Salada', 16.00, 'qtyXSalada')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                    <p id="msgXSalada" class="text-red-500 mt-2"></p>
+                    <input type="number" id="quantity-x-salada" min="1" value="1" class="w-full p-2 border rounded mb-4">
+                    <button onclick="addToCart('X-Salada', 16.00, document.getElementById('quantity-x-salada').value)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
+                    <p id="status-x-salada" class="text-green-500 mt-2"></p>
                 </div>
+                <!-- X-Bacon -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <img src="/api/placeholder/300/200" alt="X-Bacon" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h4 class="text-xl font-bold mb-2">X-Bacon</h4>
                     <p class="mb-4">Hambúrguer, queijo, bacon, alface, tomate e maionese.</p>
                     <p class="font-bold mb-4">R$ 18,00</p>
-                    <input type="number" id="qtyXBacon" class="w-full p-2 border rounded mb-4" placeholder="Quantidade" min="1">
-                    <button onclick="addToCart('X-Bacon', 18.00, 'qtyXBacon')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                    <p id="msgXBacon" class="text-red-500 mt-2"></p>
+                    <input type="number" id="quantity-x-bacon" min="1" value="1" class="w-full p-2 border rounded mb-4">
+                    <button onclick="addToCart('X-Bacon', 18.00, document.getElementById('quantity-x-bacon').value)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
+                    <p id="status-x-bacon" class="text-green-500 mt-2"></p>
                 </div>
             </div>
         </section>
 
-        <!-- Adicione as seções de acompanhamentos e bebidas conforme necessário, com a mesma lógica -->
+        <!-- Repita para outros itens do menu -->
+
     </main>
 
     <footer class="bg-gray-800 text-white mt-16 py-8">
@@ -69,23 +73,24 @@
     </footer>
 
     <script>
-        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        function addToCart(item, price, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let itemExists = false;
 
-        function addToCart(item, price, qtyId) {
-            let qty = document.getElementById(qtyId).value;
-            if (!qty || qty <= 0) {
-                alert('Por favor, informe uma quantidade válida.');
-                return;
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].item === item) {
+                    cart[i].quantity += parseInt(quantity);
+                    itemExists = true;
+                    break;
+                }
             }
 
-            if (cart[item]) {
-                document.getElementById(`msg${item.replace(/\s+/g, '')}`).innerText = 'Este produto já foi solicitado.';
-                return;
+            if (!itemExists) {
+                cart.push({item, price, quantity: parseInt(quantity)});
             }
 
-            cart[item] = { price, qty: parseInt(qty) };
             localStorage.setItem('cart', JSON.stringify(cart));
-            document.getElementById(`msg${item.replace(/\s+/g, '')}`).innerText = '';
+            document.getElementById(`status-${item.toLowerCase().replace(/ /g, '-')}`).innerText = 'Já foi solicitado!';
             alert(`${item} adicionado ao carrinho!`);
         }
     </script>
