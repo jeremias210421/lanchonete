@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-yellow-500 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Lanchonete Delivery</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="hover:underline">Início</a></li>
+                    <li><a href="menu.html" class="hover:underline">Menu</a></li>
+                    <li><a href="login.html" class="hover:underline">Login/Cadastro</a></li>
+                    <li><a href="carrinho.html" class="hover:underline">Carrinho</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-8 p-4">
+        <h2 class="text-3xl font-bold mb-8">Seu Carrinho</h2>
+
+        <div id="cartItems" class="mb-8">
+            <!-- Itens do carrinho serão exibidos aqui -->
+        </div>
+
+        <div class="text-right mb-8">
+            <h3 class="text-2xl font-bold">Total: R$ <span id="totalPrice">0,00</span></h3>
+        </div>
+
+        <div class="text-right">
+            <button onclick="checkout()" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition duration-300">Finalizar Compra</button>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16 py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Lanchonete Delivery. Todos os direitos reservados.</p>
+            <p class="mt-2">Endereço: Rua da Lanchonete, 123 - Cidade</p>
+            <p>Telefone: (XX) XXXX-XXXX | E-mail: contato@lanchonetedelivery.com</p>
+        </div>
+    </footer>
+
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItems = document.getElementById('cartItems');
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+            } else {
+                cartItems.innerHTML = '';
+                cart.forEach((item, index) => {
+                    totalPrice += item.price;
+                    cartItems.innerHTML += `
+                        <div class="bg-white p-4 rounded-lg shadow-md mb-4 flex justify-between items-center">
+                            <span>${item.item}</span>
+                            <span>R$ ${item.price.toFixed(2)}</span>
+                            <button onclick="removeFromCart(${index})" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition duration-300">Remover</button>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('totalPrice').innerText = totalPrice.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function checkout() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio.');
+                return;
+            }
+
+            // Aqui, você pode redirecionar para uma página de checkout real ou processar o pedido
+            alert('Compra finalizada! Total: R$ ' + document.getElementById('totalPrice').innerText);
+            localStorage.removeItem('cart');
+            loadCart();
+        }
+
+        // Carrega o carrinho ao carregar a página
+        window.onload = loadCart;
+    </script>
+</body>
+</html>
