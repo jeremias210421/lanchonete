@@ -3,49 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login e Cadastro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 </head>
 <body class="bg-gray-100">
     <header class="bg-yellow-500 text-white p-4">
-        <div class="container mx-auto">
-            <h1 class="text-2xl font-bold">Login de Cliente</h1>
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Login e Cadastro</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="hover:underline">Início</a></li>
+                    <li><a href="menu.html" class="hover:underline">Menu</a></li>
+                    <li><a href="carrinho.html" class="hover:underline">Carrinho</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
     <main class="container mx-auto mt-8 p-4">
-        <h2 class="text-3xl font-bold mb-8">Login</h2>
-        <form id="loginForm">
+        <h2 class="text-3xl font-bold mb-8">Cadastro</h2>
+
+        <form id="registerForm" class="bg-white p-6 rounded-lg shadow-md">
             <div class="mb-4">
-                <label for="email" class="block text-lg font-bold">Email:</label>
-                <input type="email" id="email" class="w-full p-2 border border-gray-300 rounded" required>
+                <label for="name" class="block text-gray-700">Nome:</label>
+                <input type="text" id="name" class="w-full p-2 border rounded" required>
             </div>
             <div class="mb-4">
-                <label for="password" class="block text-lg font-bold">Senha:</label>
-                <input type="password" id="password" class="w-full p-2 border border-gray-300 rounded" required>
+                <label for="email" class="block text-gray-700">E-mail:</label>
+                <input type="email" id="email" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Senha:</label>
+                <input type="password" id="password" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="address" class="block text-gray-700">Endereço Completo:</label>
+                <input type="text" id="address" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-gray-700">Telefone:</label>
+                <input type="tel" id="phone" class="w-full p-2 border rounded" required>
+            </div>
+            <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Cadastrar</button>
+        </form>
+
+        <h2 class="text-3xl font-bold mt-12 mb-8">Login</h2>
+
+        <form id="loginForm" class="bg-white p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label for="loginEmail" class="block text-gray-700">E-mail:</label>
+                <input type="email" id="loginEmail" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="loginPassword" class="block text-gray-700">Senha:</label>
+                <input type="password" id="loginPassword" class="w-full p-2 border rounded" required>
             </div>
             <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Entrar</button>
         </form>
-        <p class="mt-4">Ainda não tem uma conta? <a href="cadastro.html" class="text-blue-500">Cadastre-se aqui.</a></p>
     </main>
 
+    <footer class="bg-gray-800 text-white mt-16 py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Lanchonete Delivery. Todos os direitos reservados.</p>
+            <p class="mt-2">Endereço: Rua da Lanchonete, 123 - Cidade</p>
+            <p>Telefone: (XX) XXXX-XXXX | E-mail: contato@lanchonetedelivery.com</p>
+        </div>
+    </footer>
+
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let address = document.getElementById('address').value;
+            let phone = document.getElementById('phone').value;
 
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(user => user.email === email && user.password === password);
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users.push({ name, email, password, address, phone });
+            localStorage.setItem('users', JSON.stringify(users));
 
-            if (user) {
-                alert('Login bem-sucedido!');
-                // Aqui você pode redirecionar o usuário para a página inicial ou de menu
-                window.location.href = 'menu.html';
-            } else {
-                alert('Email ou senha incorretos. Tente novamente.');
-            }
+            alert('Cadastro realizado com sucesso!');
+            window.location.href = 'login.html';
         });
-    </script>
-</body>
-</html>
+
+        document.getElementById('loginForm').add
