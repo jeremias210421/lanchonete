@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lanchonete Delivery - Menu</title>
+    <title>Carrinho de Compras</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 </head>
 <body class="bg-gray-100">
@@ -22,74 +22,19 @@
     </header>
 
     <main class="container mx-auto mt-8 p-4">
-        <h2 class="text-3xl font-bold mb-8">Nosso Menu</h2>
+        <h2 class="text-3xl font-bold mb-8">Seu Carrinho</h2>
 
-        <section class="mb-12">
-            <h3 class="text-2xl font-bold mb-4">Hambúrgueres</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="/api/placeholder/300/200" alt="X-Burger" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-xl font-bold mb-2">X-Burger</h4>
-                    <p class="mb-4">Hambúrguer, queijo, alface, tomate e maionese.</p>
-                    <p class="font-bold mb-4">R$ 15,00</p>
-                    <button onclick="addToCart('X-Burger', 15.00)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="/api/placeholder/300/200" alt="X-Salada" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-xl font-bold mb-2">X-Salada</h4>
-                    <p class="mb-4">Hambúrguer, queijo, alface, tomate, cebola e maionese.</p>
-                    <p class="font-bold mb-4">R$ 16,00</p>
-                    <button onclick="addToCart('X-Salada', 16.00)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="/api/placeholder/300/200" alt="X-Bacon" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-xl font-bold mb-2">X-Bacon</h4>
-                    <p class="mb-4">Hambúrguer, queijo, bacon, alface, tomate e maionese.</p>
-                    <p class="font-bold mb-4">R$ 18,00</p>
-                    <button onclick="addToCart('X-Bacon', 18.00)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-        </section>
+        <div id="cartItems" class="mb-8">
+            <!-- Itens do carrinho serão exibidos aqui -->
+        </div>
 
-        <section class="mb-12">
-            <h3 class="text-2xl font-bold mb-4">Acompanhamentos</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="/api/placeholder/300/200" alt="Batata Frita" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-xl font-bold mb-2">Batata Frita</h4>
-                    <p class="mb-4">Porção de batatas fritas crocantes.</p>
-                    <p class="font-bold mb-4">R$ 8,00</p>
-                    <button onclick="addToCart('Batata Frita', 8.00)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="/api/placeholder/300/200" alt="Onion Rings" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-xl font-bold mb-2">Onion Rings</h4>
-                    <p class="mb-4">Anéis de cebola empanados e fritos.</p>
-                    <p class="font-bold mb-4">R$ 10,00</p>
-                    <button onclick="addToCart('Onion Rings', 10.00)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-        </section>
+        <div class="text-right mb-8">
+            <h3 class="text-2xl font-bold">Total: R$ <span id="totalPrice">0,00</span></h3>
+        </div>
 
-        <section>
-            <h3 class="text-2xl font-bold mb-4">Bebidas</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="/api/placeholder/300/200" alt="Refrigerante" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-xl font-bold mb-2">Refrigerante</h4>
-                    <p class="mb-4">Lata 350ml</p>
-                    <p class="font-bold mb-4">R$ 5,00</p>
-                    <button onclick="addToCart('Refrigerante', 5.00)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="/api/placeholder/300/200" alt="Suco Natural" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h4 class="text-xl font-bold mb-2">Suco Natural</h4>
-                    <p class="mb-4">Copo 300ml</p>
-                    <p class="font-bold mb-4">R$ 7,00</p>
-                    <button onclick="addToCart('Suco Natural', 7.00)" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Adicionar ao Carrinho</button>
-                </div>
-            </div>
-        </section>
+        <div class="text-right">
+            <button onclick="checkout()" class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition duration-300">Finalizar Compra</button>
+        </div>
     </main>
 
     <footer class="bg-gray-800 text-white mt-16 py-8">
@@ -101,12 +46,52 @@
     </footer>
 
     <script>
-        function addToCart(item, price) {
+        function loadCart() {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.push({item, price});
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`${item} adicionado ao carrinho!`);
+            let cartItems = document.getElementById('cartItems');
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Seu carrinho está vazio.</p>';
+            } else {
+                cartItems.innerHTML = '';
+                cart.forEach((item, index) => {
+                    totalPrice += item.price;
+                    cartItems.innerHTML += `
+                        <div class="bg-white p-4 rounded-lg shadow-md mb-4 flex justify-between items-center">
+                            <span>${item.item}</span>
+                            <span>R$ ${item.price.toFixed(2)}</span>
+                            <button onclick="removeFromCart(${index})" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition duration-300">Remover</button>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('totalPrice').innerText = totalPrice.toFixed(2);
         }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function checkout() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio.');
+                return;
+            }
+
+            // Aqui, você pode redirecionar para uma página de checkout real ou processar o pedido
+            alert('Compra finalizada! Total: R$ ' + document.getElementById('totalPrice').innerText);
+            localStorage.removeItem('cart');
+            loadCart();
+        }
+
+        // Carrega o carrinho ao carregar a página
+        window.onload = loadCart;
     </script>
 </body>
 </html>
