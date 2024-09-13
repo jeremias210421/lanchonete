@@ -57,3 +57,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Funções adicionais seriam adicionadas aqui para outras funcionalidades
 // como sistema de pontos, rastreamento de pedidos, etc.
+
+
+
+
+
+const messages = document.getElementById('messages');
+const input = document.getElementById('input');
+const sendBtn = document.getElementById('send-btn');
+const addKnowledgeBtn = document.getElementById('add-knowledge-btn');
+const addRoutineBtn = document.getElementById('add-routine-btn');
+const knowledgeModal = document.getElementById('add-knowledge-modal');
+const routineModal = document.getElementById('add-routine-modal');
+const closeKnowledge = document.getElementById('close-knowledge');
+const closeRoutine = document.getElementById('close-routine');
+const submitKnowledge = document.getElementById('submit-knowledge');
+const submitRoutine = document.getElementById('submit-routine');
+const knowledgeKey = document.getElementById('knowledge-key');
+const knowledgeValue = document.getElementById('knowledge-value');
+const routineTrigger = document.getElementById('routine-trigger');
+const routineResponse = document.getElementById('routine-response');
+
+// Adiciona a mensagem ao chat
+function addMessage(text, sender) {
+  const messageElement = document.createElement('div');
+  messageElement.className = `message ${sender}`;
+  messageElement.textContent = text;
+  messages.appendChild(messageElement);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Envia a mensagem do usuário
+sendBtn.addEventListener('click', () => {
+  const userInput = input.value.trim();
+  if (userInput) {
+    addMessage(userInput, 'user');
+    input.value = '';
+    // Aqui você pode adicionar lógica para processar a mensagem e responder
+  }
+});
+
+// Adiciona o conhecimento ao modal
+addKnowledgeBtn.addEventListener('click', () => {
+  knowledgeModal.style.display = 'flex';
+});
+
+// Fecha o modal de conhecimento
+closeKnowledge.addEventListener('click', () => {
+  knowledgeModal.style.display = 'none';
+});
+
+// Adiciona o conhecimento
+submitKnowledge.addEventListener('click', () => {
+  // Adicione lógica para adicionar conhecimento à base
+  knowledgeModal.style.display = 'none';
+});
+
+// Adiciona a rotina ao modal
+addRoutineBtn.addEventListener('click', () => {
+  routineModal.style.display = 'flex';
+});
+
+// Fecha o modal de rotina
+closeRoutine.addEventListener('click', () => {
+  routineModal.style.display = 'none';
+});
+
+// Adiciona a rotina
+submitRoutine.addEventListener('click', () => {
+  // Adicione lógica para adicionar rotina
+  routineModal.style.display = 'none';
+});
