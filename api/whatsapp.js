@@ -1,8 +1,10 @@
 const { Client } = require('whatsapp-web.js');
+const qrcode = require('qrcode');
 const fs = require('fs');
 const path = require('path');
 
 let client;
+let qrCodeData = null;
 
 async function initializeClient() {
   if (!client) {
@@ -13,10 +15,25 @@ async function initializeClient() {
       sessionData = JSON.parse(fs.readFileSync(SESSION_FILE_PATH, 'utf8'));
     }
 
-    client = new Client({ session: sessionData });
+    client = new Client({ 
+      session: sessionData,
+      puppeteer: {
+        args: ['--no-sandbox']
+      }
+    });
+
+    client.on('qr', async (qr) => {
+      qrCodeData = await qrcode.toDataURL(qr);
+    });
 
     client.on('authenticated', (session) => {
       fs.writeFileSync(SESSION_FILE_PATH, JSON.stringify(session));
+      qrCodeData = null;
+    });
+
+    client.on('ready', () => {
+      console.log('Client is ready!');
+      qrCodeData = null;
     });
 
     await client.initialize();
@@ -25,16 +42,7 @@ async function initializeClient() {
 }
 
 async function generateAutoResponse(message) {
-  const responses = {
-    'oi': 'Olá! Como posso ajudar?',
-    'bom dia': 'Bom dia! Em que posso ajudar?',
-    'tudo bem': 'Estou bem, obrigado! E você?',
-    'horário': 'Estamos abertos de 8h às 18h de segunda a sexta.',
-    'endereço': 'Nosso endereço é Rua Exemplo, 123, São Paulo - SP.',
-    'preço': 'Os preços variam conforme o serviço. Por favor, entre em contato para um orçamento específico.',
-  };
-  const lowerCaseMessage = message.toLowerCase();
-  return responses[lowerCaseMessage] || `Resposta automática para: ${message}`;
+  // ... (mantenha a função generateAutoResponse como estava antes)
 }
 
 module.exports = async (req, res) => {
@@ -45,8 +53,12 @@ module.exports = async (req, res) => {
   } else if (req.method === 'GET') {
     try {
       const client = await initializeClient();
-      if (client && client.pupPage && client.pupPage.isConnected()) {
-        res.status(200).json({ status: 'Conectado!' });
+      if (client.pupPage && client.pupPage.isConnected()) {
+        if (qrCodeData) {
+          res.status(200).json({ status: 'QR Code disponível', qrCode: qrCodeData });
+        } else {
+          res.status(200).json({ status: 'Conectado!' });
+        }
       } else {
         res.status(200).json({ status: 'Conectando...' });
       }
