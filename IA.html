@@ -15,81 +15,28 @@ const HumanizedApplianceRepairAssistant = () => {
       response: "Problemas com a máquina de lavar podem ser frustrantes. Vamos tentar algumas soluções simples: verifique se ela está nivelada, se o filtro está limpo e se não há sobrecarga de roupas. Se essas verificações não resolverem, um técnico pode fazer uma avaliação mais detalhada.",
       followUp: "Você notou algum barulho estranho ou vazamento ao usar a máquina?"
     },
+    // Outras perguntas frequentes (continue adicionando conforme necessário)
     "fogão": {
       response: "Quanto ao seu fogão, é importante verificar se os queimadores estão limpos e se há fornecimento adequado de gás. Para problemas no forno, pode ser necessário verificar o termostato ou a resistência. A segurança é crucial quando se trata de aparelhos a gás.",
       followUp: "Você consegue descrever exatamente o que está acontecendo com seu fogão?"
     },
-    "micro-ondas": {
-      response: "Sua segurança é nossa prioridade. Por isso, não recomendamos tentar consertar micro-ondas sozinho devido aos riscos envolvidos. O melhor seria agendar uma visita técnica para uma avaliação segura e profissional.",
-      followUp: "Qual sintoma específico você está observando no seu micro-ondas?"
-    },
-    "horário": {
-      response: "Estamos à disposição de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Fazemos o possível para nos adequar à agenda dos nossos clientes.",
-      followUp: "Há algum horário específico que seria mais conveniente para você?"
-    },
-    "agendamento": {
-      response: "Claro, posso ajudar você a agendar um serviço. Para marcar uma visita, você pode ligar para (11) 1234-5678 ou enviar um WhatsApp para (11) 98765-4321. Nossa equipe está pronta para atendê-lo e encontrar o melhor horário para você.",
-      followUp: "Você prefere que eu tente agendar agora ou gostaria de mais informações sobre nossos serviços?"
-    },
-    "garantia": {
-      response: "Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo. Isso demonstra nossa confiança na qualidade do nosso trabalho e proporciona tranquilidade aos nossos clientes.",
-      followUp: "Você teve alguma experiência anterior com garantias de serviços de reparo?"
-    },
-    "preço": {
-      response: "Os preços variam conforme o serviço necessário. Para sua conveniência, oferecemos orçamento gratuito para a maioria dos reparos.",
-      followUp: "Há algum serviço específico que você gostaria de saber o preço aproximado?"
-    },
-    // Adicionando mais perguntas frequentes
-    "endereço da loja": {
-      response: "Nossa loja está localizada na Avenida Principal, nº 123, Centro. Estamos abertos de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h.",
-      followUp: "Você gostaria de mais informações sobre como chegar até nós?"
-    },
-    "buscar na residência": {
-      response: "Oferecemos serviço de retirada e entrega de eletrodomésticos para reparo. Para isso, preciso saber o seu endereço completo.",
-      followUp: "Por favor, poderia me informar o seu endereço para agendarmos a retirada?"
-    },
-    "formas de pagamento": {
-      response: "Aceitamos pagamentos em dinheiro, cartão de crédito e débito, bem como transferências bancárias. Parcelamos em até 3x sem juros no cartão de crédito para serviços acima de R$ 300.",
-      followUp: "Você gostaria de saber mais sobre alguma forma de pagamento específica?"
-    },
-    "tempo de conserto": {
-      response: "O tempo de conserto depende do tipo de defeito e da disponibilidade de peças. Em média, os reparos são concluídos em 3 a 5 dias úteis.",
-      followUp: "Posso verificar o tempo estimado de conserto para o seu aparelho específico?"
-    },
-    "recolocação de peças": {
-      response: "Utilizamos apenas peças originais ou de alta qualidade equivalentes. Garantimos a durabilidade e o funcionamento adequado do seu eletrodoméstico.",
-      followUp: "Você gostaria de mais detalhes sobre as peças usadas em nossos serviços?"
-    },
-    "segurança durante a pandemia": {
-      response: "Estamos seguindo todos os protocolos de segurança, como o uso de máscaras, higienização de ferramentas e distanciamento social, para proteger você e nossa equipe.",
-      followUp: "Você gostaria de saber mais sobre as medidas que estamos adotando?"
-    },
-    "serviço de urgência": {
-      response: "Oferecemos serviços de reparo de emergência em casos críticos. A taxa de emergência é adicional e depende da urgência e do horário.",
-      followUp: "Gostaria de agendar um serviço de emergência?"
-    },
-    "qualificação dos técnicos": {
-      response: "Nossos técnicos são certificados e têm vasta experiência no conserto de eletrodomésticos de diversas marcas. Fazemos treinamentos regulares para garantir a qualidade do serviço.",
-      followUp: "Gostaria de saber mais sobre nossa equipe de técnicos?"
-    },
-    "consultoria técnica": {
-      response: "Oferecemos consultoria técnica para ajudar a identificar o problema com seu eletrodoméstico e oferecer a melhor solução. Este serviço pode ser feito remotamente ou presencialmente.",
-      followUp: "Gostaria de agendar uma consultoria técnica?"
-    },
-    // Continue adicionando perguntas frequentes conforme necessário
+    // Mais perguntas...
   };
 
   const handleSendMessage = () => {
     if (input.trim() === '') return;
 
-    setMessages([...messages, { text: input, sender: 'user' }]);
+    setMessages(prevMessages => [
+      ...prevMessages, 
+      { text: input, sender: 'user' }
+    ]);
     processMessage(input);
     setInput('');
   };
 
   const processMessage = (message) => {
     const lowerMessage = message.toLowerCase();
-    let response = "Peço desculpas, mas não tenho uma resposta específica para essa pergunta. Para informações mais detalhadas, sugiro entrar em contato conosco pelo telefone (11) 1234-5678. Nossa equipe terá prazer em ajudar você pessoalmente. Há algo mais em que eu possa tentar ajudar?";
+    let response = "Peço desculpas, mas não tenho uma resposta específica para essa pergunta. Para mais detalhes, entre em contato pelo telefone (11) 1234-5678. Posso ajudar em mais alguma coisa?";
     let followUp = "Posso esclarecer mais alguma dúvida sobre nossos serviços?";
 
     for (const [key, value] of Object.entries(knowledgeBase)) {
@@ -106,13 +53,13 @@ const HumanizedApplianceRepairAssistant = () => {
         ...prevMessages, 
         { text: "Olá! Bem-vindo à Assistência Técnica de Eletrodomésticos. Como posso ajudar você hoje?", sender: 'ai' }
       ]);
-    } else {
-      setMessages(prevMessages => [
-        ...prevMessages, 
-        { text: response, sender: 'ai' },
-        { text: followUp, sender: 'ai' }
-      ]);
-    }
+    } 
+
+    setMessages(prevMessages => [
+      ...prevMessages, 
+      { text: response, sender: 'ai' },
+      { text: followUp, sender: 'ai' }
+    ]);
   };
 
   return (
@@ -144,6 +91,7 @@ const HumanizedApplianceRepairAssistant = () => {
           onChange={(e) => setInput(e.target.value)}
           style={{ flexGrow: 1, marginRight: '10px', padding: '10px', borderRadius: '20px', border: '1px solid #ccc' }}
           placeholder="Digite sua pergunta..."
+          onKeyPress={(e) => e.key === 'Enter' ? handleSendMessage() : null}
         />
         <button 
           onClick={handleSendMessage} 
