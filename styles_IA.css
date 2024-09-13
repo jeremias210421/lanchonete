@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #e5ddd5; /* Cor de fundo semelhante ao WhatsApp */
 }
 
 .chat-container {
@@ -21,7 +21,7 @@ body {
     overflow-y: auto;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    background-color: #e5ddd5;
+    background-color: #e5ddd5; /* Cor de fundo das mensagens */
 }
 
 .message {
@@ -37,7 +37,7 @@ body {
 }
 
 .message.ai .bubble {
-    background-color: #e0e0e0;
+    background-color: #f1f0f0;
     color: black;
     align-self: flex-start;
 }
@@ -45,7 +45,7 @@ body {
 .bubble {
     max-width: 75%;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 20px;
     word-wrap: break-word;
 }
 
