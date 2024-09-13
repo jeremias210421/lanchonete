@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const value = knowledgeValue.value.trim();
     if (key && value) {
       // Adicionar lógica para adicionar conhecimento à base
+      console.log(`Adicionado ao conhecimento: ${key} - ${value}`);
       knowledgeKey.value = '';
       knowledgeValue.value = '';
       knowledgeModal.style.display = 'none';
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const response = routineResponse.value.trim();
     if (trigger && response) {
       // Adicionar lógica para adicionar rotina
+      console.log(`Adicionada rotina: ${trigger} - ${response}`);
       routineTrigger.value = '';
       routineResponse.value = '';
       routineModal.style.display = 'none';
