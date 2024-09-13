@@ -1,49 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assistente AI Avançado</title>
-  <link rel="stylesheet" href="styles_IA.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente de Atendimento</title>
+    <link rel="stylesheet" href="styles_IA.css">
 </head>
 <body>
-  <div class="chat-container">
-    <header>
-      <h1>Assistente AI Avançado</h1>
-    </header>
-    <div id="messages" class="messages"></div>
-    <div class="input-container">
-      <input id="input" type="text" placeholder="Digite sua mensagem..." />
-      <button id="send-btn">Enviar</button>
+    <div id="chat-container">
+        <div id="header" class="header">
+            <div id="status" class="status">
+                <div class="status-indicator"></div>
+                <span class="status-text">Online</span>
+            </div>
+        </div>
+        <div id="messages" class="messages"></div>
+        <div class="input-container">
+            <input type="file" id="file-input" style="display: none;">
+            <button id="attach-btn" class="attach-btn">📎</button>
+            <textarea id="input" placeholder="Digite sua mensagem..."></textarea>
+            <button id="send-btn" class="send-btn">Enviar</button>
+        </div>
     </div>
-    <div class="button-container">
-      <button id="add-knowledge-btn">Adicionar Conhecimento</button>
-      <button id="add-routine-btn">Adicionar Rotina</button>
-    </div>
-  </div>
-
-  <!-- Knowledge Modal -->
-  <div id="add-knowledge-modal" class="modal">
-    <div class="modal-content">
-      <span id="close-knowledge" class="close">&times;</span>
-      <h2>Adicionar ao Conhecimento Base</h2>
-      <input id="knowledge-key" type="text" placeholder="Palavra-chave" />
-      <input id="knowledge-value" type="text" placeholder="Informação" />
-      <button id="submit-knowledge">Adicionar</button>
-    </div>
-  </div>
-
-  <!-- Routine Modal -->
-  <div id="add-routine-modal" class="modal">
-    <div class="modal-content">
-      <span id="close-routine" class="close">&times;</span>
-      <h2>Adicionar Nova Rotina</h2>
-      <input id="routine-trigger" type="text" placeholder="Gatilho" />
-      <input id="routine-response" type="text" placeholder="Resposta" />
-      <button id="submit-routine">Adicionar</button>
-    </div>
-  </div>
-
-  <script src="script_IA.js"></script>
+    <script src="script_IA.js"></script>
 </body>
 </html>
