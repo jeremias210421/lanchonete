@@ -11,7 +11,7 @@ if (fs.existsSync(SESSION_FILE_PATH)) {
 const client = new Client({ session: sessionData });
 
 client.on('qr', (qr) => {
-    console.log('QR Code:', qr); // Aqui, você pode adicionar lógica para expor o QR code para o frontend
+    console.log('QR Code:', qr);
 });
 
 client.on('ready', () => {
