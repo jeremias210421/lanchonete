@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageInput = document.getElementById('messageInput');
     const sendButton = document.getElementById('sendButton');
     const messagesContainer = document.getElementById('messages');
+    const statusElement = document.getElementById('status');
+    const qrCodeContainer = document.getElementById('qrCodeContainer');
 
     function appendMessage(text, sender) {
         const messageElement = document.createElement('div');
@@ -38,4 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
             sendMessage();
         }
     });
+
+    // Função para simular QR Code e conexão
+    function simulateQRCode() {
+        qrCodeContainer.innerHTML = '<img src="https://via.placeholder.com/150" alt="QR Code" />';
+    }
+
+    function updateStatus(status) {
+        statusElement.textContent = status;
+    }
+
+    simulateQRCode();
+    updateStatus('Conectado!');
+
+    // Atualize o status de conexão com a API do WhatsApp
+    // Use a API de backend para saber o status real
 });
