@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const inputField = document.getElementById('input');
     const sendButton = document.getElementById('send-btn');
+    const attachButton = document.getElementById('attach-btn');
+    const fileInput = document.getElementById('file-input');
     const messagesContainer = document.getElementById('messages');
 
     // Base de conhecimento
@@ -61,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "não resfria": "Se o aparelho não está resfriando adequadamente, pode ser um problema com o termostato, gás refrigerante ou outros componentes. Verifique e, se necessário, um técnico pode ajudar."
     };
 
+    let conversationHistory = [];
+
     const sendMessage = () => {
         const messageText = inputField.value.trim();
         if (messageText) {
@@ -69,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => addMessage(response, 'ai'), 500);
             inputField.value = '';
             inputField.focus();
+            conversationHistory.push({ sender: 'user', text: messageText });
+            conversationHistory.push({ sender: 'ai', text: response });
         }
     };
 
@@ -93,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Check knowledge base
         for (const [key, value] of Object.entries(knowledgeBase)) {
             if (lowerMessage.includes(key)) {
-                // If we have a follow-up question, include it in the response
                 const response = value.response;
                 const followUp = value.followUp;
                 return `${response} ${followUp}`;
@@ -122,4 +127,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle Send button click
     sendButton.addEventListener('click', sendMessage);
+
+    // Handle file attachment
+    attachButton.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            addMessage(`Arquivo enviado: ${file.name}`, 'user');
+            // Aqui você pode adicionar lógica para enviar o arquivo, se necessário.
+        }
+    });
 });
