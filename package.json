@@ -1,0 +1,21 @@
+{
+  "name": "whatsapp-bot",
+  "version": "1.0.0",
+  "description": "A WhatsApp bot using whatsapp-web.js",
+  "main": "api/whatsapp.js",
+  "scripts": {
+    "start": "vercel dev",
+    "deploy": "vercel deploy --prod"
+  },
+  "dependencies": {
+    "whatsapp-web.js": "^1.19.4",
+    "qrcode": "^1.5.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "vercel": "^28.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
