@@ -37,6 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     "boa noite": "Boa noite! Como posso ajudar você esta noite? Se tiver alguma dúvida, estou à disposição."
   };
 
+  const personalQuestions = {
+    "tudo bem": "Sim, estou bem, obrigado por perguntar! Como posso ajudar você hoje?",
+    "como você está": "Estou bem, obrigado! E você, como está? Em que posso ajudar hoje?",
+    "como vai": "Estou indo bem, obrigado! Como posso ajudar você hoje?"
+  };
+
   const sendMessage = () => {
     const messageText = inputField.value.trim();
     if (messageText) {
@@ -50,6 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getResponse = (message) => {
     const lowerMessage = message.toLowerCase();
+
+    // Check personal questions
+    for (const [key, value] of Object.entries(personalQuestions)) {
+      if (lowerMessage.includes(key)) return value;
+    }
 
     // Check greetings first
     for (const [key, value] of Object.entries(greetings)) {
