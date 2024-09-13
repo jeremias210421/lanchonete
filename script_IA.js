@@ -55,7 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     "dúvidas sobre nossa empresa": "Se você tiver dúvidas sobre nossa empresa, nossa equipe está disponível para fornecer informações sobre nossa experiência, qualificações e serviços oferecidos.",
     "endereços de filiais": "Podemos fornecer informações sobre os endereços das nossas filiais ou pontos de atendimento. Entre em contato para obter o endereço mais próximo de você.",
     "atendimento personalizado": "Nos esforçamos para oferecer um atendimento personalizado para atender às suas necessidades específicas. Se você precisar de um atendimento especial ou tiver requisitos específicos, por favor, nos informe.",
-    "novidades e promoções": "Fique atento às novidades e promoções que oferecemos periodicamente. Inscreva-se em nossa lista de e-mails ou siga nossas redes sociais para não perder as ofertas e atualizações.",
+    "ouvidoria": "Para questões que não foram resolvidas de forma satisfatória, você pode entrar em contato com nossa ouvidoria. Estamos comprometidos em resolver qualquer problema e garantir sua satisfação.",
+    "atendimento online": "Oferecemos atendimento online para conveniência dos nossos clientes. Você pode entrar em contato conosco através do nosso site, e-mail ou redes sociais para suporte online.",
+    "troca de aparelho": "Se você precisa trocar um aparelho, entre em contato conosco para saber mais sobre o processo e os requisitos para a troca. Podemos fornecer orientação e assistência durante o processo.",
+    "assistência técnica para equipamentos específicos": "Se você precisa de assistência técnica para um tipo específico de equipamento, informe-nos sobre o modelo e o problema, e nossa equipe fornecerá suporte especializado.",
+    "cuidados com eletrodomésticos": "Para garantir a longevidade dos seus eletrodomésticos, é importante seguir as recomendações de cuidados e manutenção. Entre em contato para obter dicas e orientações sobre cuidados com seus aparelhos.",
+    "informações sobre nossa equipe": "Nossa equipe é composta por profissionais qualificados e experientes. Se você deseja saber mais sobre nossas qualificações e especializações, estaremos felizes em fornecer informações adicionais.",
     "reclamações": "Se você tiver uma reclamação sobre nossos serviços, entre em contato conosco diretamente. Estamos comprometidos em resolver qualquer problema e melhorar continuamente.",
     "horários de atendimento especiais": "Para horários de atendimento especiais, como feriados, entre em contato conosco para verificar a disponibilidade e agendar o melhor horário para você.",
     "suporte técnico remoto": "Oferecemos suporte técnico remoto para alguns problemas. Se você precisar de assistência à distância, informe-nos e nossa equipe pode ajudar a solucionar o problema via telefone ou videoconferência.",
@@ -182,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trigger = routineTrigger.value.trim();
     const response = routineResponse.value.trim();
     if (trigger && response) {
-      console.log(`Adicionada rotina: ${trigger} - ${response}`);
+      console.log(`Nova rotina adicionada: Gatilho - ${trigger}, Resposta - ${response}`);
       routineTrigger.value = '';
       routineResponse.value = '';
       routineModal.style.display = 'none';
