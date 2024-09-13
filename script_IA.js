@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendButton = document.getElementById('send-btn');
     const messagesContainer = document.getElementById('messages');
 
+    // Base de conhecimento
     const knowledgeBase = {
         "geladeira": {
             response: "Para problemas com a geladeira, verifique a temperatura, a vedação das portas e faça uma limpeza geral. Se o problema persistir, agende uma visita técnica.",
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "localização": "Estamos na Rua Exemplo, 123, Bairro Exemplo, Cidade, Estado. Se precisar de ajuda para encontrar nosso endereço, entre em contato."
     };
 
+    // Perguntas pessoais
     const personalQuestions = {
         "tudo bem": "Sim, estou bem, obrigado por perguntar! Como posso ajudar você hoje?",
         "como você está": "Estou bem, obrigado! E você, como está? Em que posso ajudar hoje?",
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "como está indo": "Estou indo bem, obrigado! Há algo específico com o que eu possa ajudar?"
     };
 
+    // Saudações
     const greetings = {
         "olá": "Olá! Como posso ajudar você hoje? Se tiver alguma dúvida ou precisar de assistência, estou aqui para ajudar.",
         "oi": "Oi! Em que posso ajudar você hoje? Sinta-se à vontade para me perguntar qualquer coisa.",
@@ -50,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "boa noite": "Boa noite! Como posso ajudar você esta noite? Se tiver alguma dúvida, estou à disposição."
     };
 
+    // Problemas comuns com eletrodomésticos
     const applianceProblems = {
         "não liga": "Se o aparelho não está ligando, pode ser um problema com a fonte de energia ou um fusível queimado. Verifique essas questões e, se necessário, um técnico pode ajudar.",
         "faz barulho": "Barulhos estranhos podem indicar problemas com o motor, rolamentos ou outras partes internas. Recomendo verificar se há obstruções e, se necessário, chamar um técnico.",
@@ -110,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle Enter key
     inputField.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && !event.shiftKey) {
             event.preventDefault();
             sendMessage();
         }
