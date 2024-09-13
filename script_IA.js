@@ -12,12 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitRoutineBtn = document.getElementById('submit-routine');
 
   const knowledgeBase = {
-    "geladeira": "Entendo que você esteja tendo problemas com sua geladeira. Para começar, verifique se a temperatura está adequada e se as portas estão bem vedadas. Uma limpeza geral também pode ajudar. Se o problema persistir, talvez seja necessário um técnico. Posso te ajudar a agendar uma visita?",
-    "máquina de lavar": "Sinto muito que você esteja enfrentando problemas com a máquina de lavar. Primeiramente, verifique se ela está nivelada, se o filtro está limpo e se não há sobrecarga de roupas. Se esses passos não resolverem, talvez um técnico precise dar uma olhada.",
-    "fogão": "Sobre o fogão, certifique-se de que os queimadores estão limpos e que há um bom fornecimento de gás. Se o problema for com o forno, pode ser necessário verificar o termostato ou a resistência. Se precisar de ajuda adicional, estou aqui para ajudar!",
-    "micro-ondas": "Por motivos de segurança, não recomendo tentar consertar o micro-ondas por conta própria. O ideal é agendar uma visita técnica para garantir que tudo seja feito de forma segura e correta. Posso te ajudar a marcar uma visita?",
-    "horário": "Estamos aqui para atender você de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar de mais detalhes ou quiser saber sobre um horário específico, é só me avisar!",
-    "agendamento": "Para agendar um serviço, você pode ligar para (11) 1234-5678 ou enviar um WhatsApp para (11) 98765-4321. Estamos aqui para ajudar com a marcação de horários que sejam convenientes para você.",
+    "geladeira": {
+      response: "Entendo que você está tendo problemas com sua geladeira. Para começar, verifique a temperatura e se as portas estão bem vedadas. Também é uma boa ideia fazer uma limpeza geral. Se o problema persistir, podemos agendar uma visita técnica. Posso ajudar com isso?",
+      followUp: "Qual o problema específico que você está enfrentando com a geladeira? Está fazendo barulho, não está esfriando, ou algo mais?"
+    },
+    "máquina de lavar": {
+      response: "Se você está com problemas na máquina de lavar, verifique se ela está nivelada, se o filtro está limpo e se não há sobrecarga de roupas. Se precisar de ajuda com um técnico, posso ajudar a marcar uma visita.",
+      followUp: "Você notou algum barulho estranho ou vazamento? Isso pode ajudar a identificar o problema."
+    },
+    "fogão": {
+      response: "Para o fogão, é importante verificar se os queimadores estão limpos e se há um fornecimento adequado de gás. Se o problema for com o forno, pode ser necessário verificar o termostato ou a resistência. Posso ajudar a agendar uma visita técnica se precisar.",
+      followUp: "Pode me dizer mais sobre o problema? O fogão não está acendendo, ou há algum outro problema?"
+    },
+    "micro-ondas": {
+      response: "Não recomendamos tentar consertar o micro-ondas sozinho devido aos riscos. O ideal é agendar uma visita técnica para uma avaliação segura. Posso ajudar a marcar uma visita?",
+      followUp: "Qual sintoma específico você está observando no micro-ondas? Está parando de funcionar, fazendo barulho, ou algo mais?"
+    },
+    "horário": "Estamos disponíveis de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar de mais detalhes ou quiser saber sobre um horário específico, é só me avisar!",
+    "agendamento": "Para agendar um serviço, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321. Estamos aqui para ajudar com a marcação de horários que sejam convenientes para você.",
     "garantia": "Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo. Isso é para garantir que você esteja satisfeito com o serviço prestado. Se precisar de mais informações sobre a garantia, estou à disposição!",
     "preço": "Os preços podem variar conforme o serviço necessário. Para a maioria dos reparos, oferecemos orçamento gratuito. Se você tiver um serviço específico em mente, posso te fornecer uma estimativa de preço!"
   };
@@ -63,7 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check knowledge base
     for (const [key, value] of Object.entries(knowledgeBase)) {
-      if (lowerMessage.includes(key.toLowerCase())) return value;
+      if (lowerMessage.includes(key.toLowerCase())) {
+        // If we have a follow-up question, include it in the response
+        const response = value.response;
+        const followUp = value.followUp;
+        return `${response} ${followUp}`;
+      }
     }
 
     // Default response
@@ -99,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const key = document.getElementById('knowledge-key').value.trim();
     const value = document.getElementById('knowledge-value').value.trim();
     if (key && value) {
-      knowledgeBase[key.toLowerCase()] = value;
+      knowledgeBase[key.toLowerCase()] = { response: value, followUp: "" };
       hideModal(knowledgeModal);
     }
   });
