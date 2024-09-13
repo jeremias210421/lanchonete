@@ -82,4 +82,19 @@ document.addEventListener('DOMContentLoaded', () => {
         messageElement.className = `message ${sender}`;
         messageElement.innerHTML = `<div class="bubble">${text}</div>`;
         messagesContainer.appendChild(messageElement);
-        messagesContainer.scroll
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
+
+    sendButton.addEventListener('click', sendMessage);
+
+    inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    attachButton.addEventListener('click', () => {
+        fileInput.click();
+    });
+});
