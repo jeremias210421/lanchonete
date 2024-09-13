@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendButton = document.getElementById('sendButton');
     const messagesContainer = document.getElementById('messages');
     const statusElement = document.getElementById('status');
-    const qrCodeContainer = document.getElementById('qrCodeContainer');
 
     function appendMessage(text, sender) {
         const messageElement = document.createElement('div');
@@ -34,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             appendMessage(data.response, 'ai');
         } catch (error) {
             console.error('Error sending message:', error);
+            appendMessage('Erro ao enviar mensagem. Por favor, tente novamente.', 'error');
         } finally {
             sendButton.disabled = false;
         }
@@ -47,27 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Função para simular QR Code e conexão
-    function simulateQRCode() {
-        qrCodeContainer.innerHTML = '<img src="https://via.placeholder.com/150" alt="QR Code" />';
-    }
-
-    function updateStatus(status) {
-        statusElement.textContent = status;
-    }
-
-    simulateQRCode();
-
-    // Verifique o status real do backend e atualize o status
-    async function checkConnection() {
+    async function updateStatus() {
         try {
-            const response = await fetch('/api/status');
+            const response = await fetch('/api/whatsapp');
             const data = await response.json();
-            updateStatus(data.status);
+            statusElement.textContent = data.status;
         } catch (error) {
-            updateStatus('Erro ao conectar.');
+            statusElement.textContent = 'Erro ao conectar.';
         }
     }
 
-    checkConnection();
+    // Atualiza o status a cada 5 segundos
+    setInterval(updateStatus, 5000);
+    updateStatus(); // Atualiza imediatamente ao carregar a página
 });
