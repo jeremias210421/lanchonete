@@ -14,6 +14,7 @@ body {
     background-color: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .messages {
@@ -30,6 +31,21 @@ body {
     align-items: flex-end;
 }
 
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.ai {
+    justify-content: flex-start;
+}
+
+.bubble {
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 20px;
+    word-wrap: break-word;
+}
+
 .message.user .bubble {
     background-color: #007bff;
     color: white;
@@ -40,13 +56,6 @@ body {
     background-color: #f1f0f0;
     color: black;
     align-self: flex-start;
-}
-
-.bubble {
-    max-width: 75%;
-    padding: 10px;
-    border-radius: 20px;
-    word-wrap: break-word;
 }
 
 .input-container {
