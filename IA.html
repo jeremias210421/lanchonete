@@ -5,6 +5,7 @@ const HumanizedApplianceRepairAssistant = () => {
   const [input, setInput] = useState('');
   const [isFirstMessage, setIsFirstMessage] = useState(true);
 
+  // Base de conhecimento expandida com perguntas frequentes
   const knowledgeBase = {
     "geladeira": {
       response: "Entendo sua preocupação com a geladeira. Para problemas comuns, recomendo verificar a temperatura, a vedação das portas e fazer uma limpeza geral. Se o problema persistir, seria melhor agendar uma visita técnica. Posso ajudar você a marcar um horário?",
@@ -23,7 +24,7 @@ const HumanizedApplianceRepairAssistant = () => {
       followUp: "Qual sintoma específico você está observando no seu micro-ondas?"
     },
     "horário": {
-      response: "Fico feliz em informar nosso horário de atendimento. Estamos à disposição de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Fazemos o possível para nos adequar à agenda dos nossos clientes.",
+      response: "Estamos à disposição de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Fazemos o possível para nos adequar à agenda dos nossos clientes.",
       followUp: "Há algum horário específico que seria mais conveniente para você?"
     },
     "agendamento": {
@@ -31,13 +32,51 @@ const HumanizedApplianceRepairAssistant = () => {
       followUp: "Você prefere que eu tente agendar agora ou gostaria de mais informações sobre nossos serviços?"
     },
     "garantia": {
-      response: "Entendo que a garantia é importante para você. Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo. Isso demonstra nossa confiança na qualidade do nosso trabalho e proporciona tranquilidade aos nossos clientes.",
+      response: "Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo. Isso demonstra nossa confiança na qualidade do nosso trabalho e proporciona tranquilidade aos nossos clientes.",
       followUp: "Você teve alguma experiência anterior com garantias de serviços de reparo?"
     },
     "preço": {
-      response: "Quanto aos preços, eles variam conforme o serviço necessário. Para sua conveniência, oferecemos orçamento gratuito para a maioria dos reparos. Assim, você pode tomar uma decisão informada sem compromisso.",
+      response: "Os preços variam conforme o serviço necessário. Para sua conveniência, oferecemos orçamento gratuito para a maioria dos reparos.",
       followUp: "Há algum serviço específico que você gostaria de saber o preço aproximado?"
-    }
+    },
+    // Adicionando mais perguntas frequentes
+    "endereço da loja": {
+      response: "Nossa loja está localizada na Avenida Principal, nº 123, Centro. Estamos abertos de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h.",
+      followUp: "Você gostaria de mais informações sobre como chegar até nós?"
+    },
+    "buscar na residência": {
+      response: "Oferecemos serviço de retirada e entrega de eletrodomésticos para reparo. Para isso, preciso saber o seu endereço completo.",
+      followUp: "Por favor, poderia me informar o seu endereço para agendarmos a retirada?"
+    },
+    "formas de pagamento": {
+      response: "Aceitamos pagamentos em dinheiro, cartão de crédito e débito, bem como transferências bancárias. Parcelamos em até 3x sem juros no cartão de crédito para serviços acima de R$ 300.",
+      followUp: "Você gostaria de saber mais sobre alguma forma de pagamento específica?"
+    },
+    "tempo de conserto": {
+      response: "O tempo de conserto depende do tipo de defeito e da disponibilidade de peças. Em média, os reparos são concluídos em 3 a 5 dias úteis.",
+      followUp: "Posso verificar o tempo estimado de conserto para o seu aparelho específico?"
+    },
+    "recolocação de peças": {
+      response: "Utilizamos apenas peças originais ou de alta qualidade equivalentes. Garantimos a durabilidade e o funcionamento adequado do seu eletrodoméstico.",
+      followUp: "Você gostaria de mais detalhes sobre as peças usadas em nossos serviços?"
+    },
+    "segurança durante a pandemia": {
+      response: "Estamos seguindo todos os protocolos de segurança, como o uso de máscaras, higienização de ferramentas e distanciamento social, para proteger você e nossa equipe.",
+      followUp: "Você gostaria de saber mais sobre as medidas que estamos adotando?"
+    },
+    "serviço de urgência": {
+      response: "Oferecemos serviços de reparo de emergência em casos críticos. A taxa de emergência é adicional e depende da urgência e do horário.",
+      followUp: "Gostaria de agendar um serviço de emergência?"
+    },
+    "qualificação dos técnicos": {
+      response: "Nossos técnicos são certificados e têm vasta experiência no conserto de eletrodomésticos de diversas marcas. Fazemos treinamentos regulares para garantir a qualidade do serviço.",
+      followUp: "Gostaria de saber mais sobre nossa equipe de técnicos?"
+    },
+    "consultoria técnica": {
+      response: "Oferecemos consultoria técnica para ajudar a identificar o problema com seu eletrodoméstico e oferecer a melhor solução. Este serviço pode ser feito remotamente ou presencialmente.",
+      followUp: "Gostaria de agendar uma consultoria técnica?"
+    },
+    // Continue adicionando perguntas frequentes conforme necessário
   };
 
   const handleSendMessage = () => {
