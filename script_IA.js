@@ -1,100 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
 
-/* Basic styles for the chat container */
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 90vh;
-  max-width: 500px;
+  height: 100vh;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-}
-
-header {
-  text-align: center;
-  margin-bottom: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .messages {
   flex: 1;
   overflow-y: auto;
   padding: 10px;
-  background: #fff;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+.message {
   margin-bottom: 10px;
+}
+
+.message.user {
+  text-align: right;
+}
+
+.message.ai {
+  text-align: left;
 }
 
 .input-container {
   display: flex;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
-#input {
+input {
   flex: 1;
   padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-#send-btn {
+button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
   background-color: #007bff;
   color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 10px;
   cursor: pointer;
 }
 
-.button-container {
-  display: flex;
-  justify-content: space-between;
+button:hover {
+  background-color: #0056b3;
 }
 
-.button-container button {
-  background-color: #e0e0e0;
-  border: none;
-  border-radius: 20px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.button-container button:hover {
-  background-color: #ccc;
-}
-
-/* Message styles */
-.message {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.message.user .bubble {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 20px;
-  padding: 10px;
-  max-width: 60%;
-  align-self: flex-end;
-}
-
-.message.ai .bubble {
-  background-color: #e0e0e0;
-  color: #000;
-  border-radius: 20px;
-  padding: 10px;
-  max-width: 60%;
-  align-self: flex-start;
-}
-
-/* Modal styles */
 .modal {
   display: none;
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
@@ -104,16 +77,16 @@ header {
 
 .modal-content {
   background-color: #fff;
-  border-radius: 8px;
   padding: 20px;
-  width: 80%;
-  max-width: 400px;
-  position: relative;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 80%;
 }
 
 .close {
   position: absolute;
   top: 10px;
   right: 10px;
+  font-size: 20px;
   cursor: pointer;
 }
