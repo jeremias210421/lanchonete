@@ -16,11 +16,36 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f8f9fa;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #25d366; /* Verde WhatsApp */
+    margin-right: 5px;
+}
+
+.status-text {
+    font-size: 14px;
+    color: #555;
+}
+
 #messages {
     flex: 1;
     overflow-y: auto;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
     background-color: #e5ddd5;
 }
 
@@ -46,7 +71,7 @@ body {
 }
 
 .message.user .bubble {
-    background-color: #34b7f1;
+    background-color: #34b7f1; /* Azul WhatsApp */
     color: #ffffff;
     margin-left: auto;
     border-bottom-right-radius: 0;
@@ -86,7 +111,6 @@ button {
     padding: 10px;
     border-radius: 20px;
     font-size: 14px;
-    color: #34b7f1;
     transition: background-color 0.3s;
 }
 
@@ -96,7 +120,7 @@ button:hover {
 
 .send-btn {
     font-size: 14px;
-    background-color: #34b7f1;
+    background-color: #34b7f1; /* Azul WhatsApp */
     color: #ffffff;
 }
 
