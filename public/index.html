@@ -26,6 +26,12 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        .qr-code {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
         .messages {
             flex: 1;
             overflow-y: auto;
@@ -82,10 +88,19 @@
         .input-container button:disabled {
             background-color: #ccc;
         }
+        .status {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <div class="chat-container">
+        <div class="qr-code" id="qrCodeContainer">
+            <!-- QR Code será exibido aqui -->
+        </div>
+        <div class="status" id="status">Conectando...</div>
         <div class="messages" id="messages"></div>
         <div class="input-container">
             <input type="text" id="messageInput" placeholder="Digite sua mensagem..." />
