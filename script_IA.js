@@ -12,19 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitRoutineBtn = document.getElementById('submit-routine');
 
   const knowledgeBase = {
-    "geladeira": "Para problemas com geladeiras, verifique a temperatura, a vedação das portas e a limpeza geral. Se persistir, agende uma visita técnica.",
-    "máquina de lavar": "Verifique se a máquina está nivelada, o filtro limpo e não há sobrecarga de roupas. Caso contrário, um técnico pode ser necessário.",
-    "fogão": "Certifique-se de que os queimadores estão limpos e há fornecimento adequado de gás. Para problemas no forno, verifique o termostato ou resistência.",
-    "micro-ondas": "Não tente consertar micro-ondas sozinho. Agende uma visita técnica para uma avaliação segura.",
-    "horário": "Estamos à disposição de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h.",
-    "agendamento": "Para agendar um serviço, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321.",
-    "garantia": "Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo.",
-    "preço": "Os preços variam conforme o serviço. Oferecemos orçamento gratuito para a maioria dos reparos."
+    "geladeira": "Parece que você está enfrentando problemas com a geladeira. Verifique a temperatura, a vedação das portas e faça uma limpeza geral. Se isso não resolver, talvez seja hora de agendar uma visita técnica. Posso te ajudar com isso?",
+    "máquina de lavar": "Problemas com a máquina de lavar podem ser bem inconvenientes. Confira se ela está nivelada, se o filtro está limpo e se não há sobrecarga de roupas. Se o problema continuar, um técnico pode ser necessário para uma análise mais detalhada.",
+    "fogão": "Sobre o fogão, verifique se os queimadores estão limpos e se há um bom fornecimento de gás. Se o problema estiver no forno, pode ser necessário checar o termostato ou a resistência.",
+    "micro-ondas": "Por questões de segurança, recomendamos não tentar consertar o micro-ondas sozinho. O melhor é agendar uma visita técnica para garantir uma avaliação segura e profissional.",
+    "horário": "Estamos disponíveis para te ajudar de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar, posso te fornecer mais informações sobre nossos horários.",
+    "agendamento": "Para agendar um serviço, você pode ligar para (11) 1234-5678 ou enviar um WhatsApp para (11) 98765-4321. Como posso te ajudar a marcar um horário que seja conveniente para você?",
+    "garantia": "Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo. Isso mostra nossa confiança na qualidade do nosso trabalho e te dá a tranquilidade necessária.",
+    "preço": "Os preços variam dependendo do serviço necessário. Oferecemos orçamento gratuito para a maioria dos reparos. Posso te ajudar com um orçamento para algum serviço específico?"
   };
 
   const routines = [
-    { trigger: 'como posso agendar', response: 'Você pode agendar um serviço ligando para (11) 1234-5678 ou enviando um WhatsApp para (11) 98765-4321.' },
-    { trigger: 'qual o horário de atendimento', response: 'Estamos disponíveis de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h.' }
+    { trigger: 'como posso agendar', response: 'Para agendar um serviço, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321. Estou aqui para ajudar com o agendamento!' },
+    { trigger: 'qual o horário de atendimento', response: 'Nosso horário de atendimento é de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar de mais detalhes, é só me avisar!' }
   ];
 
   const showModal = (modal) => modal.style.display = 'flex';
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Default response
-    return "Desculpe, não tenho uma resposta específica para isso. Como posso ajudar de outra forma?";
+    return "Desculpe, não consegui entender sua mensagem. Poderia me dar mais detalhes ou me dizer como posso ajudar de outra forma?";
   };
 
   const addMessage = (text, sender) => {
