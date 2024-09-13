@@ -12,20 +12,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitRoutineBtn = document.getElementById('submit-routine');
 
   const knowledgeBase = {
-    "geladeira": "Parece que você está enfrentando problemas com a geladeira. Verifique a temperatura, a vedação das portas e faça uma limpeza geral. Se isso não resolver, talvez seja hora de agendar uma visita técnica. Posso te ajudar com isso?",
-    "máquina de lavar": "Problemas com a máquina de lavar podem ser bem inconvenientes. Confira se ela está nivelada, se o filtro está limpo e se não há sobrecarga de roupas. Se o problema continuar, um técnico pode ser necessário para uma análise mais detalhada.",
-    "fogão": "Sobre o fogão, verifique se os queimadores estão limpos e se há um bom fornecimento de gás. Se o problema estiver no forno, pode ser necessário checar o termostato ou a resistência.",
-    "micro-ondas": "Por questões de segurança, recomendamos não tentar consertar o micro-ondas sozinho. O melhor é agendar uma visita técnica para garantir uma avaliação segura e profissional.",
-    "horário": "Estamos disponíveis para te ajudar de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar, posso te fornecer mais informações sobre nossos horários.",
-    "agendamento": "Para agendar um serviço, você pode ligar para (11) 1234-5678 ou enviar um WhatsApp para (11) 98765-4321. Como posso te ajudar a marcar um horário que seja conveniente para você?",
-    "garantia": "Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo. Isso mostra nossa confiança na qualidade do nosso trabalho e te dá a tranquilidade necessária.",
-    "preço": "Os preços variam dependendo do serviço necessário. Oferecemos orçamento gratuito para a maioria dos reparos. Posso te ajudar com um orçamento para algum serviço específico?"
+    "geladeira": "Entendo que você esteja tendo problemas com sua geladeira. Para começar, verifique se a temperatura está adequada e se as portas estão bem vedadas. Uma limpeza geral também pode ajudar. Se o problema persistir, talvez seja necessário um técnico. Posso te ajudar a agendar uma visita?",
+    "máquina de lavar": "Sinto muito que você esteja enfrentando problemas com a máquina de lavar. Primeiramente, verifique se ela está nivelada, se o filtro está limpo e se não há sobrecarga de roupas. Se esses passos não resolverem, talvez um técnico precise dar uma olhada.",
+    "fogão": "Sobre o fogão, certifique-se de que os queimadores estão limpos e que há um bom fornecimento de gás. Se o problema for com o forno, pode ser necessário verificar o termostato ou a resistência. Se precisar de ajuda adicional, estou aqui para ajudar!",
+    "micro-ondas": "Por motivos de segurança, não recomendo tentar consertar o micro-ondas por conta própria. O ideal é agendar uma visita técnica para garantir que tudo seja feito de forma segura e correta. Posso te ajudar a marcar uma visita?",
+    "horário": "Estamos aqui para atender você de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar de mais detalhes ou quiser saber sobre um horário específico, é só me avisar!",
+    "agendamento": "Para agendar um serviço, você pode ligar para (11) 1234-5678 ou enviar um WhatsApp para (11) 98765-4321. Estamos aqui para ajudar com a marcação de horários que sejam convenientes para você.",
+    "garantia": "Oferecemos uma garantia de 3 meses para todos os nossos serviços de reparo. Isso é para garantir que você esteja satisfeito com o serviço prestado. Se precisar de mais informações sobre a garantia, estou à disposição!",
+    "preço": "Os preços podem variar conforme o serviço necessário. Para a maioria dos reparos, oferecemos orçamento gratuito. Se você tiver um serviço específico em mente, posso te fornecer uma estimativa de preço!"
   };
 
   const routines = [
-    { trigger: 'como posso agendar', response: 'Para agendar um serviço, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321. Estou aqui para ajudar com o agendamento!' },
-    { trigger: 'qual o horário de atendimento', response: 'Nosso horário de atendimento é de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar de mais detalhes, é só me avisar!' }
+    { trigger: 'agendar', response: 'Para agendar um serviço, por favor, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321. Como posso ajudar com o agendamento?' },
+    { trigger: 'horário de atendimento', response: 'Estamos disponíveis de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h. Se precisar de mais detalhes, estou aqui para ajudar!' }
   ];
+
+  const greetings = {
+    "olá": "Olá! Como posso ajudar você hoje? Se tiver alguma dúvida ou precisar de assistência, estou aqui para ajudar.",
+    "oi": "Oi! Em que posso ajudar você hoje? Sinta-se à vontade para me perguntar qualquer coisa.",
+    "bom dia": "Bom dia! Como posso assisti-lo hoje? Se precisar de ajuda com algo, é só me falar.",
+    "boa tarde": "Boa tarde! Estou aqui para ajudar. O que você precisa hoje?",
+    "boa noite": "Boa noite! Como posso ajudar você esta noite? Se tiver alguma dúvida, estou à disposição."
+  };
 
   const showModal = (modal) => modal.style.display = 'flex';
   const hideModal = (modal) => modal.style.display = 'none';
@@ -44,7 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const getResponse = (message) => {
     const lowerMessage = message.toLowerCase();
 
-    // Check routines first
+    // Check greetings first
+    for (const [key, value] of Object.entries(greetings)) {
+      if (lowerMessage.includes(key)) return value;
+    }
+
+    // Check routines
     const matchedRoutine = routines.find(routine => lowerMessage.includes(routine.trigger.toLowerCase()));
     if (matchedRoutine) return matchedRoutine.response;
 
