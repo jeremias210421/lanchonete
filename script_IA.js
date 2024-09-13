@@ -1,3 +1,4 @@
+// script.js
 document.addEventListener('DOMContentLoaded', () => {
     const inputField = document.getElementById('input');
     const sendButton = document.getElementById('send-btn');
@@ -5,7 +6,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('file-input');
     const messagesContainer = document.getElementById('messages');
 
-    // Função para adicionar uma mensagem ao chat
+    const greetings = {
+        'olá': 'Olá! Como posso ajudar você hoje?',
+        'bom dia': 'Bom dia! Como posso ajudar você?',
+        'boa tarde': 'Boa tarde! O que posso fazer por você?',
+        'boa noite': 'Boa noite! Em que posso ajudar?',
+    };
+
+    const personalQuestions = {
+        'como você está': 'Estou bem, obrigado! Como posso ajudar você hoje?',
+        'tudo bem': 'Tudo ótimo, obrigado por perguntar! Em que posso ajudar?',
+        'como vai': 'Vou bem, obrigado! E você, como está?',
+    };
+
+    const applianceProblems = {
+        'geladeira': 'Verifique a temperatura e a vedação das portas. Caso o problema persista, entre em contato com um técnico.',
+        'máquina de lavar': 'Certifique-se de que está nivelada e que o filtro está limpo. Caso continue com problemas, um técnico poderá ajudar.',
+        'fogão': 'Verifique os queimadores e o fornecimento de gás. Se o problema for no forno, verifique o termostato.',
+        'micro-ondas': 'Não tente consertar por conta própria. Agende uma visita técnica para uma avaliação profissional.',
+    };
+
+    const knowledgeBase = {
+        'horário': 'Estamos disponíveis de segunda a sexta, das 8h às 18h, e aos sábados das 8h às 12h.',
+        'endereço': 'Nosso endereço é Rua Exemplo, 123, São Paulo - SP.',
+        'preço': 'Os preços variam conforme o serviço. Oferecemos orçamento gratuito para a maioria dos serviços.',
+        'atendente': 'Se desejar falar com um atendente, ligue para (11) 1234-5678 ou envie um e-mail para atendimento@exemplo.com.',
+    };
+
     const addMessage = (text, sender) => {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', sender);
@@ -14,32 +41,27 @@ document.addEventListener('DOMContentLoaded', () => {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
 
-    // Função para obter a resposta com base na mensagem do usuário
     const getResponse = (message) => {
         const lowerMessage = message.toLowerCase();
-        
-        // Respostas de boas-vindas
+
         for (const [key, response] of Object.entries(greetings)) {
             if (lowerMessage.includes(key)) {
                 return response;
             }
         }
-        
-        // Respostas pessoais
+
         for (const [key, response] of Object.entries(personalQuestions)) {
             if (lowerMessage.includes(key)) {
                 return response;
             }
         }
-        
-        // Problemas com eletrodomésticos
+
         for (const [key, response] of Object.entries(applianceProblems)) {
             if (lowerMessage.includes(key)) {
                 return response;
             }
         }
 
-        // Outras perguntas
         for (const [key, response] of Object.entries(knowledgeBase)) {
             if (lowerMessage.includes(key)) {
                 return response;
@@ -49,20 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return "Desculpe, não consegui entender sua mensagem. Poderia me dar mais detalhes ou me dizer como posso ajudar de outra forma?";
     };
 
-    // Adiciona uma mensagem quando o botão de enviar é clicado
-    sendButton.addEventListener('click', () => {
-        sendMessage();
-    });
-
-    // Adiciona uma mensagem quando a tecla Enter é pressionada
-    inputField.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-        }
-    });
-
-    // Envia a mensagem e limpa o campo de entrada
     const sendMessage = () => {
         const messageText = inputField.value.trim();
         if (messageText) {
@@ -73,4 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
             inputField.focus();
         }
     };
+
+    sendButton.addEventListener('click', sendMessage);
+
+    inputField.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
 });
