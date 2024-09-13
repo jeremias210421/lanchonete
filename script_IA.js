@@ -6,32 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const messagesContainer = document.getElementById('messages');
 
     const knowledgeBase = {
-        "geladeira": {
-            response: "Para problemas com a geladeira, verifique a temperatura, a vedação das portas e faça uma limpeza geral. Se o problema persistir, agende uma visita técnica.",
-            followUp: "Qual o problema específico que você está enfrentando com a geladeira?"
-        },
-        "máquina de lavar": {
-            response: "Verifique se a máquina está nivelada, se o filtro está limpo e se não há sobrecarga. Se o problema persistir, um técnico pode ajudar.",
-            followUp: "Você notou algum barulho estranho ou vazamento?"
-        },
-        "fogão": {
-            response: "Verifique se os queimadores estão limpos e se há fornecimento adequado de gás. Para problemas no forno, pode ser necessário verificar o termostato.",
-            followUp: "Pode me dizer mais sobre o problema com o fogão?"
-        },
-        "micro-ondas": {
-            response: "Não recomendamos consertar o micro-ondas sozinho. Agende uma visita técnica para uma avaliação segura.",
-            followUp: "Qual sintoma específico você está observando no micro-ondas?"
-        },
-        "ar condicionado": {
-            response: "Para o ar condicionado, verifique se o filtro está limpo e se o aparelho está bem instalado. Se houver vazamento, um técnico pode ajudar.",
-            followUp: "O que exatamente está acontecendo com o ar condicionado?"
-        },
+        "geladeira": "Para problemas com a geladeira, verifique a temperatura, a vedação das portas e faça uma limpeza geral. Se o problema persistir, agende uma visita técnica.",
+        "máquina de lavar": "Verifique se a máquina está nivelada, se o filtro está limpo e se não há sobrecarga. Se o problema persistir, um técnico pode ajudar.",
+        "fogão": "Verifique se os queimadores estão limpos e se há fornecimento adequado de gás. Para problemas no forno, pode ser necessário verificar o termostato.",
+        "micro-ondas": "Não recomendamos consertar o micro-ondas sozinho. Agende uma visita técnica para uma avaliação segura.",
+        "ar condicionado": "Para o ar condicionado, verifique se o filtro está limpo e se o aparelho está bem instalado. Se houver vazamento, um técnico pode ajudar.",
         "horário de atendimento": "Estamos disponíveis de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h.",
         "preço": "Os preços variam conforme o serviço necessário. Oferecemos orçamento gratuito para a maioria dos reparos.",
-        "contato com atendente": "Para falar com um atendente humano, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321. Estamos à disposição para ajudar.",
+        "contato com atendente": "Para falar com um atendente humano, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321.",
         "buscamos": "Sim, oferecemos serviço de busca e entrega dos aparelhos em nossa loja. Para mais detalhes, entre em contato conosco.",
-        "endereço": "Estamos localizados na Rua Exemplo, 123, Bairro Exemplo, Cidade, Estado. Se precisar de mais informações, por favor, nos avise.",
-        "localização": "Estamos na Rua Exemplo, 123, Bairro Exemplo, Cidade, Estado. Se precisar de ajuda para encontrar nosso endereço, entre em contato."
+        "endereço": "Estamos localizados na Rua Exemplo, 123, Bairro Exemplo, Cidade, Estado.",
+        "localização": "Estamos na Rua Exemplo, 123, Bairro Exemplo, Cidade, Estado."
     };
 
     const personalQuestions = {
@@ -54,4 +39,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const applianceProblems = {
         "não liga": "Se o aparelho não está ligando, pode ser um problema com a fonte de energia ou um fusível queimado. Verifique essas questões e, se necessário, um técnico pode ajudar.",
-        "faz barulho": "Barulhos estranhos podem indicar problemas com o motor, rolamentos ou outras partes internas. Recomendo verificar se há obstruções e, se necessário, chamar um técni
+        "faz barulho": "Barulhos estranhos podem indicar problemas com o motor, rolamentos ou outras partes internas. Recomendo verificar se há obstruções e, se necessário, chamar um técnico.",
+        "vaza água": "Se o aparelho está vazando água, pode ser um problema com as mangueiras ou a vedação. Verifique se há vazamentos e, se necessário, um técnico pode avaliar o problema.",
+        "não resfria": "Se o aparelho não está resfriando adequadamente, pode ser um problema com o termostato, gás refrigerante ou outros componentes. Verifique e, se necessário, um técnico pode ajudar."
+    };
+
+    const sendMessage = () => {
+        const messageText = inputField.value.trim();
+        if (messageText) {
+            addMessage(messageText, 'user');
+            const response = getResponse(messageText);
+            setTimeout(() => addMessage(response, 'ai'), 500);
+            inputField.value = '';
+            inputField.focus();
+        }
+    };
+
+    const getResponse = (message) => {
+        const lowerMessage = message.toLowerCase();
+
+        for (const [key, value] of Object.entries(personalQuestions)) {
+            if (lowerMessage.includes(key)) return value;
+        }
+
+        for (const [key, value] of Object.entries(greetings)) {
+            if (lowerMessage.includes(key)) return value;
+        }
+
+        for (const [key, value] of Object.entries(knowledgeBase)) {
+            if (lowerMessage.includes(key)) return value;
+        }
+
+        for (const [key, value] of Object.entries(applianceProblems)) {
+            if (lowerMessage.includes(key)) return value;
+        }
+
+        return "Desculpe, não consegui entender sua mensagem. Poderia me dar mais detalhes ou me dizer como posso ajudar de outra forma?";
+    };
+
+    const addMessage = (text, sender) => {
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${sender}`;
+        messageElement.innerHTML = `<div class="bubble">${text}</div>`;
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scroll
