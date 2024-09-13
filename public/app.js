@@ -21,16 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
         messageInput.value = '';
         sendButton.disabled = true;
 
-        const response = await fetch('/api/webhook', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message })
-        }).then(res => res.json());
+        try {
+            const response = await fetch('/api/webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            });
 
-        appendMessage(response.response, 'ai');
-        sendButton.disabled = false;
+            const data = await response.json();
+            appendMessage(data.response, 'ai');
+        } catch (error) {
+            console.error('Error sending message:', error);
+        } finally {
+            sendButton.disabled = false;
+        }
     }
 
     sendButton.addEventListener('click', sendMessage);
@@ -51,8 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     simulateQRCode();
-    updateStatus('Conectado!');
 
-    // Atualize o status de conexão com a API do WhatsApp
-    // Use a API de backend para saber o status real
+    // Verifique o status real do backend e atualize o status
+    async function checkConnection() {
+        try {
+            const response = await fetch('/api/status');
+            const data = await response.json();
+            updateStatus(data.status);
+        } catch (error) {
+            updateStatus('Erro ao conectar.');
+        }
+    }
+
+    checkConnection();
 });
