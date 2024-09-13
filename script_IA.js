@@ -40,7 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const personalQuestions = {
     "tudo bem": "Sim, estou bem, obrigado por perguntar! Como posso ajudar você hoje?",
     "como você está": "Estou bem, obrigado! E você, como está? Em que posso ajudar hoje?",
-    "como vai": "Estou indo bem, obrigado! Como posso ajudar você hoje?"
+    "como vai": "Estou indo bem, obrigado! Como posso ajudar você hoje?",
+    "como está": "Estou ótimo, obrigado por perguntar! Em que posso ajudar você hoje?",
+    "está bem": "Sim, estou bem. E você, como está? Como posso ajudar?",
+    "como está você": "Estou bem, obrigado por perguntar. Como posso assisti-lo hoje?",
+    "como está indo": "Estou indo bem, obrigado! Há algo específico com o que eu possa ajudar?"
   };
 
   const sendMessage = () => {
