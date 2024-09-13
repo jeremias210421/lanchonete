@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Plus } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -29,7 +29,7 @@ const AIAssistant = () => {
   const handleSendMessage = () => {
     if (input.trim() === '') return;
 
-    setMessages([...messages, { text: input, sender: 'user' }]);
+    setMessages(prevMessages => [...prevMessages, { text: input, sender: 'user' }]);
     processMessage(input);
     setInput('');
   };
@@ -59,7 +59,7 @@ const AIAssistant = () => {
 
   const addKnowledgeBase = () => {
     if (newInfo.key && newInfo.value) {
-      setKnowledgeBase({ ...knowledgeBase, [newInfo.key]: newInfo.value });
+      setKnowledgeBase(prevKnowledgeBase => ({ ...prevKnowledgeBase, [newInfo.key]: newInfo.value }));
       setNewInfo({ key: '', value: '' });
       saveToLocalStorage();
     }
@@ -67,7 +67,7 @@ const AIAssistant = () => {
 
   const addRoutine = () => {
     if (newRoutine.trigger && newRoutine.response) {
-      setRoutines([...routines, newRoutine]);
+      setRoutines(prevRoutines => [...prevRoutines, newRoutine]);
       setNewRoutine({ trigger: '', response: '' });
       saveToLocalStorage();
     }
@@ -91,6 +91,7 @@ const AIAssistant = () => {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Digite sua mensagem..."
           className="flex-grow"
+          onKeyPress={(e) => e.key === 'Enter' ? handleSendMessage() : null}
         />
         <Button onClick={handleSendMessage} className="ml-2">
           <Send size={20} />
