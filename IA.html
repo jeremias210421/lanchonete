@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistente AI Avançado</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Inclua seu CSS aqui -->
+</head>
+<body>
+  <div class="container">
+    <h1>Assistente AI Avançado</h1>
+    
+    <div class="chat-box">
+      <div id="messages" class="messages"></div>
+    </div>
+    
+    <div class="input-group">
+      <input type="text" id="input" placeholder="Digite sua mensagem...">
+      <button id="send-btn">Enviar</button>
+    </div>
+
+    <div class="dialogs">
+      <button id="add-knowledge-btn">Adicionar Conhecimento</button>
+      <button id="add-routine-btn">Adicionar Rotina</button>
+    </div>
+
+    <!-- Modal for Adding Knowledge -->
+    <div id="add-knowledge-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-knowledge" class="close">&times;</span>
+        <h2>Adicionar ao Conhecimento Base</h2>
+        <input type="text" id="knowledge-key" placeholder="Palavra-chave">
+        <input type="text" id="knowledge-value" placeholder="Informação">
+        <button id="submit-knowledge">Adicionar</button>
+      </div>
+    </div>
+
+    <!-- Modal for Adding Routine -->
+    <div id="add-routine-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-routine" class="close">&times;</span>
+        <h2>Adicionar Nova Rotina</h2>
+        <input type="text" id="routine-trigger" placeholder="Gatilho">
+        <input type="text" id="routine-response" placeholder="Resposta">
+        <button id="submit-routine">Adicionar</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Inclua seu JS aqui -->
+  </div>
+</body>
+</html>
