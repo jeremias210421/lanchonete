@@ -1,14 +1,18 @@
-module.exports = async (req, res) => {
-    const { message } = req.body;
-    
-    // Encaminha a mensagem para o whatsapp.js
-    const response = await fetch(`${process.env.WHATSAPP_API_URL}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message })
-    }).then(res => res.json());
+const { initializeClient, generateAutoResponse } = require('./whatsapp');
 
-    res.status(200).json(response);
+module.exports = async (req, res) => {
+  if (req.method === 'POST') {
+    const { message } = req.body;
+    try {
+      const client = await initializeClient();
+      const response = await generateAutoResponse(message);
+      await client.sendMessage(message.from, response);
+      res.status(200).json({ response });
+    } catch (error) {
+      res.status(500).json({ error: 'Erro ao processar mensagem', details: error.message });
+    }
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 };
