@@ -36,9 +36,6 @@
       "bom dia": "Bom dia! Como posso assisti-lo hoje? Se precisar de ajuda com algo, é só me falar.",
       "boa tarde": "Boa tarde! Estou aqui para ajudar. O que você precisa hoje?",
       "boa noite": "Boa noite! Como posso ajudar você esta noite? Se tiver alguma dúvida, estou à disposição."
-    };
-
-    const personalQuestions = {
       "tudo bem": "Sim, estou bem, obrigado por perguntar! Como posso ajudar você hoje?",
       "como você está": "Estou bem, obrigado! E você, como está? Em que posso ajudar hoje?",
       "como vai": "Estou indo bem, obrigado! Há algo específico com o que eu possa ajudar?",
