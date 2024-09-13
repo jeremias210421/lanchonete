@@ -12,7 +12,8 @@ body {
     max-width: 400px;
     margin: 0 auto;
     border: 1px solid #ddd;
-    background-color: #fff;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #messages {
@@ -46,14 +47,16 @@ body {
 
 .message.user .bubble {
     background-color: #34b7f1;
-    color: #fff;
+    color: #ffffff;
     margin-left: auto;
+    border-bottom-right-radius: 0;
 }
 
 .message.ai .bubble {
-    background-color: #fff;
-    color: #000;
+    background-color: #ffffff;
+    color: #000000;
     margin-right: auto;
+    border-bottom-left-radius: 0;
 }
 
 .input-container {
@@ -61,7 +64,7 @@ body {
     align-items: center;
     padding: 10px;
     border-top: 1px solid #ddd;
-    background-color: #fff;
+    background-color: #ffffff;
 }
 
 textarea {
@@ -80,7 +83,7 @@ button {
     border: none;
     background: none;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 10px;
     border-radius: 20px;
     font-size: 14px;
     color: #34b7f1;
@@ -93,6 +96,8 @@ button:hover {
 
 .send-btn {
     font-size: 14px;
+    background-color: #34b7f1;
+    color: #ffffff;
 }
 
 .attach-btn {
