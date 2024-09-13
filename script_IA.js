@@ -26,7 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         "horário de atendimento": "Estamos disponíveis de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h.",
         "preço": "Os preços variam conforme o serviço necessário. Oferecemos orçamento gratuito para a maioria dos reparos.",
-        "contato com atendente": "Para falar com um atendente humano, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321. Estamos à disposição para ajudar."
+        "contato com atendente": "Para falar com um atendente humano, ligue para (11) 1234-5678 ou envie um WhatsApp para (11) 98765-4321. Estamos à disposição para ajudar.",
+        "buscamos": "Sim, oferecemos serviço de busca e entrega dos aparelhos em nossa loja. Para mais detalhes, entre em contato conosco.",
+        "endereço": "Estamos localizados na Rua Exemplo, 123, Bairro Exemplo, Cidade, Estado. Se precisar de mais informações, por favor, nos avise.",
+        "localização": "Estamos na Rua Exemplo, 123, Bairro Exemplo, Cidade, Estado. Se precisar de ajuda para encontrar nosso endereço, entre em contato."
     };
 
     const personalQuestions = {
