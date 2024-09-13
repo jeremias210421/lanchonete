@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './styles.css'; // Importa o CSS
 
 const HumanizedApplianceRepairAssistant = () => {
   const [messages, setMessages] = useState([]);
@@ -7,20 +8,7 @@ const HumanizedApplianceRepairAssistant = () => {
 
   // Base de conhecimento expandida com perguntas frequentes
   const knowledgeBase = {
-    "geladeira": {
-      response: "Entendo sua preocupação com a geladeira. Para problemas comuns, recomendo verificar a temperatura, a vedação das portas e fazer uma limpeza geral. Se o problema persistir, seria melhor agendar uma visita técnica. Posso ajudar você a marcar um horário?",
-      followUp: "Há quanto tempo você está notando esse problema com sua geladeira?"
-    },
-    "máquina de lavar": {
-      response: "Problemas com a máquina de lavar podem ser frustrantes. Vamos tentar algumas soluções simples: verifique se ela está nivelada, se o filtro está limpo e se não há sobrecarga de roupas. Se essas verificações não resolverem, um técnico pode fazer uma avaliação mais detalhada.",
-      followUp: "Você notou algum barulho estranho ou vazamento ao usar a máquina?"
-    },
-    // Outras perguntas frequentes (continue adicionando conforme necessário)
-    "fogão": {
-      response: "Quanto ao seu fogão, é importante verificar se os queimadores estão limpos e se há fornecimento adequado de gás. Para problemas no forno, pode ser necessário verificar o termostato ou a resistência. A segurança é crucial quando se trata de aparelhos a gás.",
-      followUp: "Você consegue descrever exatamente o que está acontecendo com seu fogão?"
-    },
-    // Mais perguntas...
+    // Perguntas frequentes e respostas...
   };
 
   const handleSendMessage = () => {
@@ -36,7 +24,7 @@ const HumanizedApplianceRepairAssistant = () => {
 
   const processMessage = (message) => {
     const lowerMessage = message.toLowerCase();
-    let response = "Peço desculpas, mas não tenho uma resposta específica para essa pergunta. Para mais detalhes, entre em contato pelo telefone (11) 1234-5678. Posso ajudar em mais alguma coisa?";
+    let response = "Peço desculpas, mas não tenho uma resposta específica para essa pergunta...";
     let followUp = "Posso esclarecer mais alguma dúvida sobre nossos serviços?";
 
     for (const [key, value] of Object.entries(knowledgeBase)) {
@@ -51,7 +39,7 @@ const HumanizedApplianceRepairAssistant = () => {
       setIsFirstMessage(false);
       setMessages(prevMessages => [
         ...prevMessages, 
-        { text: "Olá! Bem-vindo à Assistência Técnica de Eletrodomésticos. Como posso ajudar você hoje?", sender: 'ai' }
+        { text: "Olá! Bem-vindo à Assistência Técnica de Eletrodomésticos...", sender: 'ai' }
       ]);
     } 
 
@@ -63,52 +51,35 @@ const HumanizedApplianceRepairAssistant = () => {
   };
 
   return (
-    <div style={{ maxWidth: '500px', margin: '0 auto', padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1 style={{ textAlign: 'center', color: '#4a4a4a' }}>Assistente de Consertos de Eletrodomésticos</h1>
+    <div className="chat-container">
+      <h1 className="chat-header">Assistente de Consertos de Eletrodomésticos</h1>
       
-      <div style={{ height: '400px', overflowY: 'auto', border: '1px solid #ccc', marginBottom: '20px', padding: '10px', borderRadius: '5px' }}>
+      <div className="messages-container">
         {messages.map((message, index) => (
-          <div key={index} style={{ marginBottom: '10px', textAlign: message.sender === 'user' ? 'right' : 'left' }}>
-            <span style={{ 
-              background: message.sender === 'user' ? '#007bff' : '#28a745', 
-              color: 'white', 
-              padding: '8px 12px', 
-              borderRadius: '20px', 
-              display: 'inline-block',
-              maxWidth: '80%',
-              wordWrap: 'break-word'
-            }}>
-              {message.text}
-            </span>
+          <div key={index} className={`message ${message.sender}`}>
+            {message.text}
           </div>
         ))}
       </div>
       
-      <div style={{ display: 'flex', marginBottom: '20px' }}>
+      <div className="input-container">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          style={{ flexGrow: 1, marginRight: '10px', padding: '10px', borderRadius: '20px', border: '1px solid #ccc' }}
+          className="input-text"
           placeholder="Digite sua pergunta..."
           onKeyPress={(e) => e.key === 'Enter' ? handleSendMessage() : null}
         />
         <button 
           onClick={handleSendMessage} 
-          style={{ 
-            padding: '10px 20px', 
-            backgroundColor: '#007bff', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '20px', 
-            cursor: 'pointer' 
-          }}
+          className="send-button"
         >
           Enviar
         </button>
       </div>
 
-      <p style={{ textAlign: 'center', fontSize: '0.9em', color: '#666' }}>
+      <p className="footer-text">
         Estamos aqui para ajudar com qualquer dúvida sobre nossos serviços ou problemas com seus eletrodomésticos.
       </p>
     </div>
